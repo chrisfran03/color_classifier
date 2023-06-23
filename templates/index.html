@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Run return_color Function</title>
+</head>
+
+<body>
+    <h1>Run return_color Function</h1>
+
+    <label for="redInput">Red:</label>
+    <input type="number" id="redInput" min="0" max="255"><br>
+
+    <label for="greenInput">Green:</label>
+    <input type="number" id="greenInput" min="0" max="255"><br>
+
+    <label for="blueInput">Blue:</label>
+    <input type="number" id="blueInput" min="0" max="255"><br>
+
+    <button onclick="runReturnColor()">Predict</button>
+
+    <div id="colorResult"></div>
+
+    <script>
+        const url = 'http://localhost:5000/return_color';
+
+        function runReturnColor() {
+            const red = parseInt(document.getElementById('redInput').value);
+            const green = parseInt(document.getElementById('greenInput').value);
+            const blue = parseInt(document.getElementById('blueInput').value);
+
+            const data = {
+                red: red,
+                green: green,
+                blue: blue
+            };
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.text())
+                .then(color => {
+                    document.getElementById('colorResult').innerText = 'Predicted color: ' + color;
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        }
+    </script>
+</body>
+
+</html>
