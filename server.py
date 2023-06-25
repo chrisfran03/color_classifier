@@ -21,10 +21,6 @@ def return_color():
     
     color = predict_color(red, green, blue)
     return color
-# @app.route('/return_color' , methods=['POST'])
-# def return_color(red,green,blue):
-#   color = predict_color(red,green,blue)
-#   return color
 
 
 if __name__ == '__main__':
